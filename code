@@ -1,0 +1,22 @@
+from docx import Document
+doc =Document('/Users/NKH-112/Desktop/Doc1.docx')
+numbersdone=0
+numbersofcheck=0
+for para in doc.paragraphs:
+    newtxt=''
+    for char in para.text:
+        if char in '1234567890':
+           if numbersdone==0:
+               newtxt=newtxt+char
+               numbersdone+=1
+               numbersofcheck+=1
+           else:
+               newtxt=newtxt[:-1*numbersdone]+char+newtxt[-1*numbersdone:]
+               numbersdone+=1
+               numbersofcheck+=1
+        else:
+          newtxt=newtxt+char
+          numbersdone=0
+    para.text=newtxt
+print('number of check is =',numbersofcheck)
+doc.save('/Users/NKH-112/Desktop/Doc2.docx')
